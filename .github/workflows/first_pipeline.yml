@@ -1,0 +1,14 @@
+name: 🐱 first pipeline
+
+on: 
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: test step
+        run: echo "Hello from workflow"
+    
