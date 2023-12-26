@@ -11,4 +11,15 @@ jobs:
     steps:
       - name: test step
         run: echo "Hello from workflow"
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with: 
+          repository: Fenikks/word-cloud-generator
+
+      - name: test 
+        run: |
+          echo current dir is `pwd`
+          ls -la
+      
     
