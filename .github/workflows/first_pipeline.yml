@@ -3,32 +3,35 @@ name: 🐱 first pipeline
 on: 
   push:
   workflow_dispatch:
-
+env:
+  MY_VAR: ${{ vars.MY_VAR }}
+  archive_name: wcg_linux
 jobs:
-  # build:
-  #   runs-on: ubuntu-latest
-  #   container:
-  #     image: golang:1.16
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: golang:1.16
 
-  #   steps:
-  #     - name: test step
-  #       run: echo "Hello from workflow"
+    steps:
+      - name: test step
+        run: echo "Hello from workflow"
 
-  #     - name: Checkout code
-  #       uses: actions/checkout@v4
-  #       with: 
-  #         repository: Fenikks/word-cloud-generator
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with: 
+          repository: Fenikks/word-cloud-generator
 
-  #     - name: build wcg
-  #       run: |
-  #         make
-  #         ls -la
+      - name: build wcg
+        run: |
+          make
+          ls -la
+          echo archive_name is $archive_name
 
-  #     - name: Archive code coverage results
-  #       uses: actions/upload-artifact@v3
-  #       with:
-  #         name: wcg_linux
-  #         path: artifacts/linux/*
+      - name: Archive code coverage results
+        uses: actions/upload-artifact@v3
+        with:
+          name: $archive_name
+          path: artifacts/linux/*
           
   upload:
     runs-on: ubuntu-latest
@@ -44,7 +47,7 @@ jobs:
       #   MY_VAR: ${{ vars.ENV_CONTEXT_VAR }}
       run: |
         ls -la
-        echo my_var is ${{ vars.MY_VAR }}
+        
         echo github.actor is ${{ github.actor }}
         echo MY_VAR is $MY_VAR
       
