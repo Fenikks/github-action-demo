@@ -40,4 +40,9 @@ jobs:
         name: wcg_linux
 
     - name: test
-      run: ls -la
+      run: |
+        ls -la
+        echo my_var is ${{ vars.ENV_CONTEXT_VAR }}
+        echo github.actor is ${{ github.actor }}
+        echo $MY_VAR
+      
