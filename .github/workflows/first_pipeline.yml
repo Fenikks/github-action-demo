@@ -23,5 +23,21 @@ jobs:
         run: |
           make
           ls -la
-      
-    
+
+      - name: Archive code coverage results
+        uses: actions/upload-artifact@v3
+        with:
+          name: wcg_linux
+          path: artifacts/linux/*
+          
+  upload:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Download a single artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: wcg_linux
+
+    - name: test
+      run: ls -la
